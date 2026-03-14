@@ -12,7 +12,8 @@ const server = http.createServer(app);
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-  process.env.CLIENT_URL
+  process.env.CLIENT_URL,
+  'https://cep-project-qqhs.vercel.app'
 ].filter(Boolean);
 
 const io = new Server(server, {
