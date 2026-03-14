@@ -1,11 +1,10 @@
 'use client';
 import Link from 'next/link';
+import { SERVER_URL } from '@/lib/api';
 
 const CATEGORY_STYLES = {
   'Textbooks': { from: 'from-[#d4a853]', to: 'to-[#b8912e]', icon: '📚' },
   'Notes': { from: 'from-[#8b1425]', to: 'to-[#c41e3a]', icon: '📝' },
-  'Lab Equipment': { from: 'from-[#2d2118]', to: 'to-[#1a1210]', icon: '🔬' },
-  'Stationery': { from: 'from-[#8c7e72]', to: 'to-[#5a5047]', icon: '✏️' },
   'Electronics': { from: 'from-[#1a1210]', to: 'to-[#2d2118]', icon: '💻' },
   'Other': { from: 'from-[#d4a853]', to: 'to-[#8c7e72]', icon: '📦' },
 };
@@ -13,7 +12,7 @@ const CATEGORY_STYLES = {
 export default function ListingCard({ listing }) {
   const imageUrl = listing.images?.[0]?.url || '';
   const isLocalUpload = imageUrl.startsWith('/uploads/');
-  const fullImageUrl = isLocalUpload ? `http://localhost:5000${imageUrl}` : imageUrl;
+  const fullImageUrl = isLocalUpload ? `${SERVER_URL}${imageUrl}` : imageUrl;
   const style = CATEGORY_STYLES[listing.category] || CATEGORY_STYLES['Other'];
 
   return (

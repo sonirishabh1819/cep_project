@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { listingsAPI, messagesAPI, reviewsAPI } from '@/lib/api';
+import { listingsAPI, messagesAPI, reviewsAPI, SERVER_URL } from '@/lib/api';
 import Link from 'next/link';
 
 export default function ListingDetailPage() {
@@ -39,7 +39,7 @@ export default function ListingDetailPage() {
   const handleMarkSold = async () => { try { await listingsAPI.markAsSold(id); loadListing(); } catch (err) { alert(err.message); } };
   const handleDelete = async () => { if (!confirm('Delete this listing?')) return; try { await listingsAPI.delete(id); router.push('/listings'); } catch (err) { alert(err.message); } };
 
-  const getImageUrl = (img) => { const url = img?.url || ''; return url.startsWith('/uploads/') ? `http://localhost:5000${url}` : url; };
+  const getImageUrl = (img) => { const url = img?.url || ''; return url.startsWith('/uploads/') ? `${SERVER_URL}${url}` : url; };
 
   if (loading) return (
     <div className="max-w-6xl mx-auto px-6 py-8">

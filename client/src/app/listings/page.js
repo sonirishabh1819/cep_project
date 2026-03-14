@@ -5,7 +5,9 @@ import FilterSidebar from '@/components/FilterSidebar';
 import { listingsAPI } from '@/lib/api';
 import { useSearchParams } from 'next/navigation';
 
-export default function ListingsPage() {
+import { Suspense } from 'react';
+
+function ListingsContent() {
   const searchParams = useSearchParams();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -100,5 +102,13 @@ export default function ListingsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ListingsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#faf5f0] flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#c41e3a] border-t-transparent rounded-full animate-spin"></div></div>}>
+      <ListingsContent />
+    </Suspense>
   );
 }
