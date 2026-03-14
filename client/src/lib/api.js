@@ -1,4 +1,5 @@
 export const SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+export const API_URL = SERVER_URL.endsWith('/api') ? SERVER_URL : `${SERVER_URL}/api`;
 
 export async function apiFetch(endpoint, options = {}) {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -15,10 +16,7 @@ export async function apiFetch(endpoint, options = {}) {
     headers['Content-Type'] = 'application/json';
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-  const apiUrl = baseUrl.endsWith('/api') ? baseUrl : `${baseUrl}/api`;
-
-  const res = await fetch(`${apiUrl}${endpoint}`, {
+  const res = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers,
   });
