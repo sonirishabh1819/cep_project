@@ -16,7 +16,7 @@ const listingSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, 'Category is required'],
-      enum: ['Textbooks', 'Notes', 'Lab Equipment', 'Stationery', 'Electronics', 'Other'],
+      enum: ['Textbooks', 'Notes', 'Electronics', 'Other'],
     },
     subject: {
       type: String,
@@ -56,6 +56,12 @@ const listingSchema = new mongoose.Schema(
     university: {
       type: String,
       trim: true,
+      default: '',
+    },
+    dropPoint: {
+      type: String,
+      trim: true,
+      maxlength: 100,
       default: '',
     },
     seller: {

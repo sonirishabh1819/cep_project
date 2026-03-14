@@ -1,10 +1,20 @@
 'use client';
 import Link from 'next/link';
 
+const CATEGORY_STYLES = {
+  'Textbooks': { from: 'from-[#d4a853]', to: 'to-[#b8912e]', icon: '📚' },
+  'Notes': { from: 'from-[#8b1425]', to: 'to-[#c41e3a]', icon: '📝' },
+  'Lab Equipment': { from: 'from-[#2d2118]', to: 'to-[#1a1210]', icon: '🔬' },
+  'Stationery': { from: 'from-[#8c7e72]', to: 'to-[#5a5047]', icon: '✏️' },
+  'Electronics': { from: 'from-[#1a1210]', to: 'to-[#2d2118]', icon: '💻' },
+  'Other': { from: 'from-[#d4a853]', to: 'to-[#8c7e72]', icon: '📦' },
+};
+
 export default function ListingCard({ listing }) {
   const imageUrl = listing.images?.[0]?.url || '';
   const isLocalUpload = imageUrl.startsWith('/uploads/');
   const fullImageUrl = isLocalUpload ? `http://localhost:5000${imageUrl}` : imageUrl;
+  const style = CATEGORY_STYLES[listing.category] || CATEGORY_STYLES['Other'];
 
   return (
     <Link href={`/listings/${listing._id}`} className="group block">
@@ -18,13 +28,12 @@ export default function ListingCard({ listing }) {
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-center">
-                <svg className="w-12 h-12 text-[#c41e3a]/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                <span className="text-xs text-[#8c7e72] mt-2 font-body">{listing.category}</span>
-              </div>
+            <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${style.from} ${style.to} relative overflow-hidden group-hover:after:absolute group-hover:after:inset-0 group-hover:after:bg-black/10 transition-all duration-500`}>
+              <div className="absolute inset-0 bg-black/5 mix-blend-overlay"></div>
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+              <span className="text-white text-6xl transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 drop-shadow-2xl relative z-10">
+                {style.icon}
+              </span>
             </div>
           )}
 
@@ -76,12 +85,16 @@ export default function ListingCard({ listing }) {
               </div>
               <span className="text-xs text-[#8c7e72] truncate max-w-[90px] font-body">{listing.seller?.name || 'Unknown'}</span>
             </div>
-            {listing.location && (
-              <span className="text-[11px] text-[#8c7e72] font-body flex items-center gap-1">
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            {listing.dropPoint ? (
+              <span className="text-[11px] text-[#8c7e72] font-body flex items-center gap-1 bg-[#1a1210]/5 px-2 py-0.5 rounded-md truncate max-w-[120px]">
+                📦 {listing.dropPoint}
+              </span>
+            ) : listing.location ? (
+              <span className="text-[11px] text-[#8c7e72] font-body flex items-center gap-1 truncate max-w-[100px]">
+                <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 {listing.location}
               </span>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

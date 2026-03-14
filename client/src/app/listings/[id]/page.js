@@ -106,6 +106,12 @@ export default function ListingDetailPage() {
               {listing.author && <div className="flex justify-between text-sm font-body"><span className="text-[#8c7e72]">Author</span><span className="text-[#1a1210] font-medium">{listing.author}</span></div>}
               {listing.location && <div className="flex justify-between text-sm font-body"><span className="text-[#8c7e72]">Location</span><span className="text-[#1a1210] font-medium">📍 {listing.location}</span></div>}
               {listing.university && <div className="flex justify-between text-sm font-body"><span className="text-[#8c7e72]">University</span><span className="text-[#1a1210] font-medium">🏫 {listing.university}</span></div>}
+              {listing.dropPoint && (
+                <div className="flex flex-col gap-1 mt-2 pt-3 border-t border-[#e8ddd0]">
+                  <span className="text-xs font-bold text-[#c41e3a] uppercase tracking-widest font-body">📦 Drop Point Collection</span>
+                  <span className="text-[#1a1210] font-bold font-body bg-[#c41e3a]/5 px-3 py-2 rounded-lg border border-[#c41e3a]/10 inline-block w-fit">{listing.dropPoint}</span>
+                </div>
+              )}
             </div>
 
             <div className="mb-6">

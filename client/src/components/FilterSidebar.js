@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-const CATEGORIES = ['Textbooks', 'Notes', 'Lab Equipment', 'Stationery', 'Electronics', 'Other'];
+const CATEGORIES = ['Textbooks', 'Notes', 'Electronics', 'Other'];
 const CONDITIONS = ['New', 'Like New', 'Good', 'Fair', 'Poor'];
 const SORT_OPTIONS = [
   { value: 'newest', label: 'Newest First' },

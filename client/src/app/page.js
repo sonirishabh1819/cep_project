@@ -5,22 +5,20 @@ import ListingCard from '@/components/ListingCard';
 import { listingsAPI } from '@/lib/api';
 
 const STATS = [
-  { label: 'Active Listings', value: '2,400+', suffix: '' },
-  { label: 'Students Helped', value: '8,000+', suffix: '' },
-  { label: 'Money Saved', value: '₹12L', suffix: '+' },
-  { label: 'Universities', value: '150', suffix: '+' },
+  { label: 'Platform Fees', value: '0', suffix: '%' },
+  { label: 'Student Verified', value: '100', suffix: '%' },
+  { label: 'Direct Access', value: '24', suffix: '/7' },
+  { label: 'Learning Potential', value: '∞', suffix: '' },
 ];
 
 const CATEGORIES = [
   { name: 'Textbooks', icon: '📖', desc: 'Course textbooks & reference guides' },
   { name: 'Notes', icon: '📝', desc: 'Handwritten & digital study notes' },
-  { name: 'Lab Equipment', icon: '🔬', desc: 'Lab coats, kits & instruments' },
-  { name: 'Stationery', icon: '✏️', desc: 'Pens, notebooks & supplies' },
   { name: 'Electronics', icon: '💻', desc: 'Calculators, tablets & more' },
   { name: 'Other', icon: '📦', desc: 'Everything else you need' },
 ];
 
-const MARQUEE_TEXT = 'TEXTBOOKS • NOTES • LAB EQUIPMENT • STATIONERY • ELECTRONICS • STUDY GUIDES • CALCULATORS • REFERENCE BOOKS • ';
+const MARQUEE_TEXT = 'TEXTBOOKS • NOTES • ELECTRONICS • STUDY GUIDES • CALCULATORS • REFERENCE BOOKS • MATERIAL • ';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
@@ -42,9 +40,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf5f0]">
+    <div className="-mt-16 bg-[#faf5f0]">
       {/* Hero Section */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-screen pt-16 flex items-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-[#c41e3a]" />
         <div className="absolute inset-0 noise-bg" />
@@ -54,38 +52,47 @@ export default function Home() {
         <div className="absolute bottom-20 right-[8%] w-40 h-56 bg-white/5 rounded-2xl rotate-[5deg] animate-float hidden lg:block" />
         <div className="absolute top-1/3 right-[15%] w-24 h-32 bg-[#d4a853]/20 rounded-xl rotate-[12deg] animate-floatSlow hidden xl:block" />
         
-        {/* Floating book cards */}
+        {/* Floating abstract UI cards */}
         <div className="absolute top-28 left-[3%] hidden xl:block animate-slideInRotate" style={{animationDelay: '0.3s'}}>
-          <div className="w-44 bg-white/95 rounded-xl p-3 shadow-2xl shadow-black/20 rotate-[-6deg] hover:rotate-0 transition-transform duration-500">
-            <div className="aspect-[3/4] bg-gradient-to-br from-[#d4a853] to-[#b8912e] rounded-lg mb-2 flex items-center justify-center">
-              <span className="text-white text-3xl">📚</span>
+          <div className="w-44 bg-white/95 rounded-xl p-4 shadow-2xl shadow-black/20 rotate-[-6deg] hover:rotate-0 transition-transform duration-500">
+            <div className="aspect-[3/4] bg-gradient-to-br from-[#d4a853] to-[#b8912e] rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
+              <div className="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+              <span className="text-white text-4xl transform -rotate-12">📚</span>
             </div>
-            <p className="text-xs font-bold text-[#1a1210] font-body truncate">Data Structures</p>
-            <p className="text-[10px] text-[#8c7e72] font-body">₹350 • Like New</p>
+            <div className="space-y-2">
+              <div className="h-2 w-3/4 bg-[#1a1210] rounded-full opacity-80"></div>
+              <div className="h-2 w-1/2 bg-[#8c7e72] rounded-full opacity-40"></div>
+            </div>
           </div>
         </div>
         
         <div className="absolute bottom-32 left-[10%] hidden xl:block animate-slideInRotate" style={{animationDelay: '0.6s'}}>
-          <div className="w-36 bg-white/95 rounded-xl p-3 shadow-2xl shadow-black/20 rotate-[4deg] hover:rotate-0 transition-transform duration-500">
-            <div className="aspect-[3/4] bg-gradient-to-br from-[#c41e3a] to-[#8b1425] rounded-lg mb-2 flex items-center justify-center">
-              <span className="text-white text-2xl">📖</span>
+          <div className="w-36 bg-white/95 rounded-xl p-4 shadow-2xl shadow-black/20 rotate-[4deg] hover:rotate-0 transition-transform duration-500">
+            <div className="aspect-[3/4] bg-gradient-to-br from-[#c41e3a] to-[#8b1425] rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
+              <div className="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+              <span className="text-white text-3xl transform rotate-6">📖</span>
             </div>
-            <p className="text-xs font-bold text-[#1a1210] font-body truncate">Organic Chem</p>
-            <p className="text-[10px] text-[#c41e3a] font-bold font-body">FREE</p>
+            <div className="space-y-2">
+              <div className="h-2 w-full bg-[#1a1210] rounded-full opacity-80"></div>
+              <div className="h-2 w-2/3 bg-[#8c7e72] rounded-full opacity-40"></div>
+            </div>
           </div>
         </div>
         
         <div className="absolute top-36 right-[4%] hidden xl:block animate-slideInRotate" style={{animationDelay: '0.9s'}}>
-          <div className="w-40 bg-white/95 rounded-xl p-3 shadow-2xl shadow-black/20 rotate-[8deg] hover:rotate-0 transition-transform duration-500">
-            <div className="aspect-[3/4] bg-gradient-to-br from-[#2d2118] to-[#1a1210] rounded-lg mb-2 flex items-center justify-center">
-              <span className="text-white text-2xl">🔬</span>
+          <div className="w-40 bg-white/95 rounded-xl p-4 shadow-2xl shadow-black/20 rotate-[8deg] hover:rotate-0 transition-transform duration-500">
+            <div className="aspect-[3/4] bg-gradient-to-br from-[#2d2118] to-[#1a1210] rounded-lg mb-3 flex items-center justify-center overflow-hidden relative">
+              <div className="absolute inset-0 bg-white/5 mix-blend-overlay"></div>
+              <span className="text-white text-3xl transform -rotate-6">🔬</span>
             </div>
-            <p className="text-xs font-bold text-[#1a1210] font-body truncate">Lab Kit</p>
-            <p className="text-[10px] text-[#8c7e72] font-body">₹800 • Good</p>
+            <div className="space-y-2">
+              <div className="h-2 w-4/5 bg-[#1a1210] rounded-full opacity-80"></div>
+              <div className="h-2 w-1/2 bg-[#8c7e72] rounded-full opacity-40"></div>
+            </div>
           </div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full flex flex-col items-center text-center">
           <div className="max-w-3xl">
             <div className="animate-fadeInUp">
               <p className="text-white/70 text-sm font-body font-medium tracking-[0.2em] uppercase mb-8">
@@ -110,20 +117,12 @@ export default function Home() {
               Building a sustainable learning community, one book at a time.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-10 animate-fadeInUp" style={{animationDelay: '0.5s'}}>
-              <Link
-                href="/listings"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-[#c41e3a] font-bold rounded-full hover:bg-[#faf5f0] hover:shadow-2xl hover:shadow-black/20 transition-all hover:-translate-y-0.5 text-sm font-body"
-              >
+            <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-fadeInUp justify-center" style={{animationDelay: '0.4s'}}>
+              <Link href="/listings" className="px-8 py-4 bg-white text-[#c41e3a] rounded-full font-bold font-body hover:bg-[#faf5f0] hover:scale-105 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-white/10">
                 See Our Work
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all text-sm font-body"
-              >
+              <Link href="/register" className="px-8 py-4 bg-transparent border border-white/30 text-white rounded-full font-bold font-body hover:bg-white/10 hover:border-white transition-all text-center">
                 Let&apos;s Talk
               </Link>
             </div>

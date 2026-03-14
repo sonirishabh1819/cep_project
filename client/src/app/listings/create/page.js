@@ -4,7 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { listingsAPI, aiAPI } from '@/lib/api';
 
-const CATEGORIES = ['Textbooks', 'Notes', 'Lab Equipment', 'Stationery', 'Electronics', 'Other'];
+const CATEGORIES = ['Textbooks', 'Notes', 'Electronics', 'Other'];
 const CONDITIONS = ['New', 'Like New', 'Good', 'Fair', 'Poor'];
 
 export default function CreateListingPage() {
@@ -17,7 +17,7 @@ export default function CreateListingPage() {
   const [suggestedPrice, setSuggestedPrice] = useState(null);
   const [form, setForm] = useState({
     title: '', description: '', category: 'Textbooks', subject: '', courseCode: '',
-    condition: 'Good', price: '', isDonation: false, location: '', university: '', author: '',
+    condition: 'Good', price: '', isDonation: false, location: '', university: '', author: '', dropPoint: '',
   });
 
   useEffect(() => {
@@ -161,6 +161,12 @@ export default function CreateListingPage() {
             <div className="grid grid-cols-2 gap-4">
               <div><label className={labelClass}>Location</label><input type="text" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className={inputClass} placeholder="City, Campus" /></div>
               <div><label className={labelClass}>University</label><input type="text" value={form.university} onChange={(e) => setForm({ ...form, university: e.target.value })} className={inputClass} placeholder="Your university" /></div>
+            </div>
+
+            <div>
+              <label className={labelClass}>Drop Point (Optional)</label>
+              <input type="text" value={form.dropPoint} onChange={(e) => setForm({ ...form, dropPoint: e.target.value })} className={inputClass} placeholder="e.g. Main Library Foyer, South Gate Security..." maxLength={100} />
+              <p className="text-[10px] text-[#8c7e72] mt-1.5 font-body">Suggest a physical location where the buyer can collect this item.</p>
             </div>
 
             <button type="submit" disabled={loading}

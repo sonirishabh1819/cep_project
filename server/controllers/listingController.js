@@ -2,7 +2,7 @@ const Listing = require('../models/Listing');
 
 exports.createListing = async (req, res) => {
   try {
-    const { title, description, category, subject, courseCode, condition, price, isDonation, location, university, author } = req.body;
+    const { title, description, category, subject, courseCode, condition, price, isDonation, location, university, author, dropPoint } = req.body;
 
     const images = [];
     if (req.files && req.files.length > 0) {
@@ -26,6 +26,7 @@ exports.createListing = async (req, res) => {
       images,
       location: location || req.user.location || '',
       university: university || req.user.university || '',
+      dropPoint: dropPoint || '',
       seller: req.user._id,
       author: author || '',
     });
