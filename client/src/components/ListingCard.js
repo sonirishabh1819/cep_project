@@ -12,7 +12,7 @@ const CATEGORY_STYLES = {
 export default function ListingCard({ listing }) {
   const imageUrl = listing.images?.[0]?.url || '';
   const isLocalUpload = imageUrl.startsWith('/uploads/');
-  const fullImageUrl = isLocalUpload ? `${SERVER_URL}${imageUrl}` : imageUrl;
+  const fullImageUrl = isLocalUpload ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}${imageUrl}` : imageUrl;
   const style = CATEGORY_STYLES[listing.category] || CATEGORY_STYLES['Other'];
 
   return (
