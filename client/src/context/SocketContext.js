@@ -15,7 +15,7 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     if (user) {
       const token = localStorage.getItem('token');
-      const newSocket = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000', {
+      const newSocket = io(process.env.NEXT_PUBLIC_SOCKET_URL || SERVER_URL, {
         auth: { token },
       });
 
