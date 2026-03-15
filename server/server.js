@@ -9,23 +9,28 @@ const path = require('path');
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  process.env.CLIENT_URL,
-  'https://cep-project-qqhs.vercel.app'
-].filter(Boolean);
+const allowedOriginFn = function (origin, callback) {
+  if (!origin) return callback(null, true);
+  if (
+    origin.includes('vercel.app') ||
+    origin.includes('localhost') ||
+    origin === process.env.CLIENT_URL
+  ) {
+    return callback(null, true);
+  }
+  return callback(new Error('Not allowed by CORS'));
+};
 
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: allowedOriginFn,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 });
 
 // Middleware
 app.use(cors({
-  origin: allowedOrigins,
+  origin: allowedOriginFn,
   credentials: true,
 }));
 app.use(express.json());
